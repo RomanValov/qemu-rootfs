@@ -2,6 +2,12 @@ ARG ROOTFS_IMAGE=scratch
 FROM ${ROOTFS_IMAGE} as rootfs
 
 
+FROM ubuntu:18.04 as kernel
+
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+	linux-image-4.18.0-13-generic
+
+
 FROM alpine:3.8
 
 RUN apk add --no-cache \
@@ -23,6 +29,7 @@ COPY extract-tar.sh .
 COPY entrypoint.sh .
 COPY qemu.sh .
 
+COPY --from=kernel /boot/vmlinuz-4.18.0-13-generic $KERNEL
 COPY --from=rootfs / /rootfs
 
 ENTRYPOINT [ "./entrypoint.sh" ]
