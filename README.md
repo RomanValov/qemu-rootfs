@@ -39,7 +39,7 @@ $ docker run --rm -it \
 ```sh
 $ wget http://cloud-images.ubuntu.com/releases/bionic/release/ubuntu-18.04-server-cloudimg-amd64.img
 $ docker run --rm -it \
-      --volume "$PWD/ubuntu-18.04-server-cloudimg-amd64.img:/hda.img" \
+      --volume "$PWD/ubuntu-18.04-server-cloudimg-amd64.img:/hda.img:ro" \
     qemu-rootfs
 ````
 
