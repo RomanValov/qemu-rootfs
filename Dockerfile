@@ -24,12 +24,9 @@ ENV HDA_RAW /hda.img
 ENV HDA_QCOW2 /hda.qcow2
 ENV HDA_SIZE +500m
 
-COPY create-image.sh .
-COPY extract-tar.sh .
-COPY entrypoint.sh .
-COPY qemu.sh .
+COPY bin/* /usr/bin/
 
 COPY --from=kernel /boot/vmlinuz-*-generic $KERNEL
 COPY --from=rootfs / /rootfs
 
-ENTRYPOINT [ "./entrypoint.sh" ]
+ENTRYPOINT [ "/usr/bin/entrypoint.sh" ]
