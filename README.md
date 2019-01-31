@@ -36,13 +36,6 @@ $ docker run --rm -it \
     qemu-rootfs
 ````
 
-```sh
-$ wget http://cloud-images.ubuntu.com/releases/bionic/release/ubuntu-18.04-server-cloudimg-amd64.img
-$ docker run --rm -it \
-      --volume "$PWD/ubuntu-18.04-server-cloudimg-amd64.img:/hda.img:ro" \
-    qemu-rootfs
-````
-
 ## Docker image as rootfs
 
 Set `ROOTFS_IMAGE` to any Docker base image.
