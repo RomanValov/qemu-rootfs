@@ -2,10 +2,11 @@
 
 set -ex
 
-pushd "$CHROOT"
+mkdir -p "$1"
+pushd "$1"
 
-tar xf "$CHROOT.tar.xz"
+tar xf "$2"
 
-if [ -w "$CHROOT.tar.xz" ]; then
-  rm "$CHROOT.tar.xz"
+if [ -w "$2" ]; then
+  rm "$2"
 fi
