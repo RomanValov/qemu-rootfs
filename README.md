@@ -12,6 +12,25 @@ $ docker build --tag qemu-rootfs .
 
 ## Usage
 
+### Designated volume paths
+
+There a few special designated paths that may be mounted over to add files to the guest root file system.
+
+* `/rootfs`: The root file system that will be partitioned in an image.
+* `/boot/vmlinuz`: The kernel used to boot the VM.
+
+### Runtime environment configuration
+
+* `MEM`: Guest RAM size. (default: `2G`)
+* `HDA_SIZE`: Guest disk size. A static size maybe set with `5G`. Or the size of the root file system plus additional space maybe set with `+500m`. (default: `+500m`)
+
+```sh
+$ docker run --rm -it \
+      --env "MEM=2G" \
+      --env "HDA_SIZE=+500m" \
+    qemu-rootfs
+```
+
 ### debootstrap
 
 Can be used to test rootfs created with [debootstrap](https://wiki.debian.org/Debootstrap).
@@ -27,7 +46,7 @@ $ docker run --rm -it \
 ```
 
 
-## Ubuntu Cloud Image
+### Ubuntu Cloud Image
 
 ```sh
 $ wget http://cloud-images.ubuntu.com/releases/bionic/release/ubuntu-18.04-server-cloudimg-amd64-root.tar.xz
@@ -36,7 +55,7 @@ $ docker run --rm -it \
     qemu-rootfs
 ````
 
-## Docker multi-stage build
+### Docker multi-stage build
 
 Can also be used a base image in a multi-stage build where a rootfs is customized.
 
