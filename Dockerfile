@@ -18,7 +18,6 @@ RUN apk add --no-cache \
 
 ENV CHROOT /rootfs
 ENV KERNEL /boot/vmlinuz
-ENV ROOT_DEV /dev/sda
 
 ENV MEM 2G
 ENV HDA_RAW /hda.img

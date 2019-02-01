@@ -23,7 +23,7 @@ fi
 exec qemu-system-x86_64 \
   -no-reboot \
   -kernel "$KERNEL" \
-  -append "root=$ROOT_DEV rw console=ttyS0 panic=1 $APPEND" \
+  -append "root=/dev/sda rw console=ttyS0 panic=1 $APPEND" \
   -display none -serial stdio \
   $KVM \
   -m "$MEM" \
