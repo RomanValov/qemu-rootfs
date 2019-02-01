@@ -1,7 +1,3 @@
-ARG ROOTFS_IMAGE=scratch
-FROM ${ROOTFS_IMAGE} as rootfs
-
-
 FROM ubuntu:18.04 as kernel
 
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
@@ -27,6 +23,5 @@ ENV HDA_SIZE +500m
 COPY bin/* /usr/bin/
 
 COPY --from=kernel /boot/vmlinuz-*-generic $KERNEL
-COPY --from=rootfs / /rootfs
 
 ENTRYPOINT [ "/usr/bin/entrypoint.sh" ]

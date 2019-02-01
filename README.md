@@ -36,15 +36,6 @@ $ docker run --rm -it \
     qemu-rootfs
 ````
 
-## Docker image as rootfs
-
-Set `ROOTFS_IMAGE` to any Docker base image.
-
-```sh
-$ docker build --build-arg "ROOTFS_IMAGE=ubuntu:bionic" --tag qemu-rootfs .
-$ docker run --rm -it qemu-rootfs
-```
-
 ## Docker multi-stage build
 
 Can also be used a base image in a multi-stage build where a rootfs is customized.
