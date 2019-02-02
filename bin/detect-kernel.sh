@@ -18,4 +18,3 @@ INITRD=$(detect_paths "$CHROOT/initrd.img" "$CHROOT/boot/initrd.img" "$CHROOT/bo
 
 [ -e "$KERNEL" ] && cp "$KERNEL" /vmlinuz
 [ -e "$INITRD" ] && cp "$INITRD" /initrd.img
-

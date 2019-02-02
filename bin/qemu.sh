@@ -23,6 +23,7 @@ fi
 exec qemu-system-x86_64 \
   -no-reboot \
   -kernel "/vmlinuz" \
+  -initrd "/initrd.img" \
   -append "root=/dev/sda rw console=ttyS0 panic=1 $APPEND" \
   -display none -serial stdio \
   $KVM \
