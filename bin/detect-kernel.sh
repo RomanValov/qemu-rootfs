@@ -13,8 +13,8 @@ detect_paths() {
   done
 }
 
-KERNEL=$(detect_paths "$CHROOT/vmlinuz" "$CHROOT/boot/vmlinuz" "$CHROOT/boot"/vmlinuz*)
-INITRD=$(detect_paths "$CHROOT/initrd.img" "$CHROOT/boot/initrd.img" "$CHROOT/boot"/initrd.img*)
+NEW_KERNEL=$(detect_paths "$CHROOT/vmlinuz" "$CHROOT/boot/vmlinuz" "$CHROOT/boot"/vmlinuz*)
+NEW_INITRD=$(detect_paths "$CHROOT/initrd.img" "$CHROOT/boot/initrd.img" "$CHROOT/boot"/initrd.img*)
 
-[ -e "$KERNEL" ] && cp "$KERNEL" /vmlinuz
-[ -e "$INITRD" ] && cp "$INITRD" /initrd.img
+[ -e "$NEW_KERNEL" ] && cp "$NEW_KERNEL" "$KERNEL"
+[ -e "$NEW_INITRD" ] && cp "$NEW_INITRD" "$INITRD"

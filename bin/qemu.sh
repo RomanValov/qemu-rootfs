@@ -3,7 +3,7 @@
 set -ex
 
 if [ -e "/dev/kvm" ]; then
-  KVM="--enable-kvm"
+  USE_KVM="--enable-kvm"
 fi
 
 if [ ! -e "$HDA_QCOW2" ]; then
@@ -11,9 +11,13 @@ if [ ! -e "$HDA_QCOW2" ]; then
   exit 1
 fi
 
-if [ ! -e "/vmlinuz" ]; then
-  echo "missing kernel /vmlinuz" >&2
+if [ ! -e "$KERNEL" ]; then
+  echo "missing kernel" >&2
   exit 1
+fi
+
+if [ -e "$INITRD" ]; then
+  USE_INITRD="-initrd $INITRD"
 fi
 
 if [ -n "$1" ]; then
@@ -22,11 +26,11 @@ fi
 
 exec qemu-system-x86_64 \
   -no-reboot \
-  -kernel "/vmlinuz" \
-  -initrd "/initrd.img" \
+  -kernel "$KERNEL" \
+  $USE_INITRD \
   -append "root=/dev/sda rw console=ttyS0 panic=1 $APPEND" \
   -display none -serial stdio \
-  $KVM \
+  $USE_KVM \
   -m "$MEM" \
   -netdev type=user,id=net0 -device virtio-net-pci,netdev=net0 \
   -hda "$HDA_QCOW2"
