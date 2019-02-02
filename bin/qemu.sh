@@ -11,8 +11,8 @@ if [ ! -e "$HDA_QCOW2" ]; then
   exit 1
 fi
 
-if [ ! -e "$KERNEL" ]; then
-  echo "missing KERNEL=$KERNEL" >&2
+if [ ! -e "/vmlinuz" ]; then
+  echo "missing kernel /vmlinuz" >&2
   exit 1
 fi
 
@@ -22,7 +22,7 @@ fi
 
 exec qemu-system-x86_64 \
   -no-reboot \
-  -kernel "$KERNEL" \
+  -kernel "/vmlinuz" \
   -append "root=/dev/sda rw console=ttyS0 panic=1 $APPEND" \
   -display none -serial stdio \
   $KVM \
