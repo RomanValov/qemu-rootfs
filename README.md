@@ -33,10 +33,10 @@ $ docker run --rm -it \
 
 ### debootstrap
 
-Can be used to test rootfs created with [debootstrap](https://wiki.debian.org/Debootstrap).
+Can be used to test rootfs created with [debootstrap](https://wiki.debian.org/Debootstrap). Remember to include a linux kernel.
 
 ```sh
-$ sudo debootstrap --arch amd64 bionic /mnt/ubuntu http://archive.ubuntu.com/ubuntu/
+$ sudo debootstrap --arch amd64 --include=linux-image-generic bionic /mnt/ubuntu http://archive.ubuntu.com/ubuntu/
 $ echo "root:passworD1" | sudo chpasswd --root /mnt/ubuntu
 
 $ docker run --rm -it \
