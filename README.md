@@ -48,10 +48,17 @@ $ docker run --rm -it \
 
 ### Ubuntu Cloud Image
 
+Download the Ubuntu root file system along with the kernel and initrd.
+
 ```sh
 $ wget http://cloud-images.ubuntu.com/releases/bionic/release/ubuntu-18.04-server-cloudimg-amd64-root.tar.xz
+$ wget http://cloud-images.ubuntu.com/releases/bionic/release/unpacked/ubuntu-18.04-server-cloudimg-amd64-vmlinuz-generic
+$ wget http://cloud-images.ubuntu.com/releases/bionic/release/unpacked/ubuntu-18.04-server-cloudimg-amd64-initrd-generic
+
 $ docker run --rm -it \
       --volume "$PWD/ubuntu-18.04-server-cloudimg-amd64-root.tar.xz:/rootfs.tar.xz:ro" \
+      --volume "$PWD/ubuntu-18.04-server-cloudimg-amd64-vmlinuz-generic:/vmlinuz:ro" \
+      --volume "$PWD/ubuntu-18.04-server-cloudimg-amd64-initrd-generic:/initrd.img:ro" \
     qemu-rootfs
 ````
 
