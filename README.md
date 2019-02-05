@@ -68,7 +68,7 @@ Can also be used a base image in a multi-stage build where a rootfs is customize
 
 ```sh
 $ docker build --tag qemu-ubuntu - <<EOF
-FROM ubuntu:bionic as rootfs
+FROM joshpeek/ubuntu-rootfs as rootfs
 RUN apt-get update && apt-get install -y curl
 
 FROM qemu-rootfs
