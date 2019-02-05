@@ -2,16 +2,14 @@
 
 set -ex
 
-if [ -e $CHROOT.tar.* ]; then
-  extract-tar.sh "$CHROOT" $CHROOT.tar.*
+if [ -e $ROOTFS.tar.* ]; then
+  extract-tar.sh "$ROOTFS" $ROOTFS.tar.*
 fi
 
-if [ ! -e "$KERNEL" ]; then
-  detect-kernel.sh
-fi
+detect-kernel.sh
 
-if [ -e "$CHROOT" ] && [ ! -e "$HDA_QCOW2" ]; then
-  create-image.sh "$CHROOT"
+if [ -e "$ROOTFS" ] && [ ! -e "$HDA_QCOW2" ]; then
+  create-image.sh "$ROOTFS"
 fi
 
 exec qemu.sh "$@"

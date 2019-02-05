@@ -6,7 +6,7 @@ RUN apk add --no-cache \
 	qemu-img \
 	qemu-system-x86_64
 
-ENV CHROOT /rootfs
+ENV ROOTFS /rootfs
 ENV KERNEL /vmlinuz
 ENV INITRD /initrd.img
 

@@ -2,7 +2,7 @@
 
 set -e
 
-export BOOTPATH="$CHROOT:$CHROOT/boot"
+export BOOTPATH="$ROOTFS:$ROOTFS/boot"
 
 detect() {
   if [ ! -f "$3" ]; then
