@@ -1,20 +1,18 @@
 #!/bin/bash
 
-set -ex
+set -e
 
-shopt -s nullglob
+export BOOTPATH="$CHROOT:$CHROOT/boot"
 
-detect_paths() {
-  for path in "$@" ; do
-    if [ -e "$path" ]; then
-      echo "$path"
-      break
+detect() {
+  if [ ! -f "$3" ]; then
+    path=$(resolve-bootpath.sh "$2")
+    if [ -f "$path" ]; then
+      echo "Detected rootfs $1: $path" >&2
+      cp "$path" "$3"
     fi
-  done
+  fi
 }
 
-NEW_KERNEL=$(detect_paths "$CHROOT/vmlinuz" "$CHROOT/boot/vmlinuz" "$CHROOT/boot"/vmlinuz*)
-NEW_INITRD=$(detect_paths "$CHROOT/initrd.img" "$CHROOT/boot/initrd.img" "$CHROOT/boot"/initrd.img*)
-
-[ -e "$NEW_KERNEL" ] && cp "$NEW_KERNEL" "$KERNEL"
-[ -e "$NEW_INITRD" ] && cp "$NEW_INITRD" "$INITRD"
+detect "kernel" "vmlinuz" "$KERNEL"
+detect "initrd" "initrd.img" "$INITRD"
