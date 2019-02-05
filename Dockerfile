@@ -15,6 +15,6 @@ ENV HDA_RAW /hda.img
 ENV HDA_QCOW2 /hda.qcow2
 ENV HDA_SIZE +500m
 
-COPY bin/* /usr/bin/
+COPY bin/* /usr/local/bin/
 
-ENTRYPOINT [ "/usr/bin/entrypoint.sh" ]
+ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
