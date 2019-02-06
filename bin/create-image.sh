@@ -2,6 +2,14 @@
 
 set -ex
 
+if [ -e $ROOTFS.tar.* ]; then
+  extract-tar.sh "$ROOTFS" $ROOTFS.tar.*
+fi
+
+if [ -e "$ROOTFS" ]; then
+  detect-kernel.sh
+fi
+
 if [ -e "$ROOTFS" ] && [ ! -e "$HDA_RAW" ]; then
   # if HDA_SIZE starts with "+", add to computed size.
   if [[ $HDA_SIZE == +* ]]; then
@@ -9,7 +17,7 @@ if [ -e "$ROOTFS" ] && [ ! -e "$HDA_RAW" ]; then
     qemu-img create -f raw "$HDA_RAW" "${BASE_SIZE}k"
     qemu-img resize -f raw "$HDA_RAW" "$HDA_SIZE"
   else
-    qemu-img create "$HDA_RAW" "$HDA_SIZE"
+    qemu-img create -f raw "$HDA_RAW" "$HDA_SIZE"
   fi
 
   mkfs.ext2 -d "$ROOTFS/" "$HDA_RAW"
